@@ -23,4 +23,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the posts for the subbreddit.
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+        /**
+     * Get the posts of user.
+     */
+    public function userPosts()
+    {
+        return $this->belongsToMany('App\Post');
+    }
 }
