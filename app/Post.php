@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Posts extends Model
+class Post extends Model
 {
         /**
      * Get the user it belongs to.
