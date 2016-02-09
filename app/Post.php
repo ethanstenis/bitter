@@ -15,7 +15,7 @@ class Posts extends Model
     }
 
     /**
-     * Get the users that are subscribed to this post.
+     * Get the users who like this post.
      */
     public function postUsers()
     {

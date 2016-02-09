@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the posts for the subbreddit.
+     * Get the posts for this user.
      */
     public function posts()
     {
@@ -33,7 +33,7 @@ class User extends Authenticatable
     }
 
         /**
-     * Get the posts of user.
+     * Get the users who like this user's posts.
      */
     public function userPosts()
     {
