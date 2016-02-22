@@ -9,7 +9,7 @@ class Post extends Model
         /**
      * Get the user it belongs to.
      */
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

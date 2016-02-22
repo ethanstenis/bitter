@@ -45,7 +45,10 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return \App\Post::find($id);
+        return \App\Post::with([
+            'postUsers',
+            'user'
+        ])->find($id);
     }
 
     /**
