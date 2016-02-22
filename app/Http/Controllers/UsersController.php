@@ -16,7 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return \App\User::find($id);
+        return \App\User::all();
     }
 
 
@@ -28,7 +28,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-            return \App\User::with([
+        return \App\User::with([
             'userPosts',
             'posts'
         ])->find($id);
