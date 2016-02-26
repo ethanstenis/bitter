@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('posts', 'PostsController');
-Route::resource('users', 'UsersController');
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +23,15 @@ Route::resource('users', 'UsersController');
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
+    Route::get('/', function () {
+    	return view('welcome');
+	});
+
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+    
+    Route::resource('posts', 'PostsController');
+	Route::resource('users', 'UsersController');
 });
