@@ -58,16 +58,21 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $post = \App\Post::find($id);
-        $post->user_id = Auth::user()->id;
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->save();
+     public function update(Request $request, $id)
+     {
+         $post = \App\Post::find($id);
+         if ($post->user_id = \Auth::user()->id) {
+             $post->title = $request->title;
+             $post->post_description = $request->post_description;
+             $post->url = $request->url;
+             $post->save();
 
-        return $post;
-    }
+         } else {
+             return response ("Unauthorized", 403);
+         }
+
+         return $post;
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -75,11 +80,15 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $post = \App\Post::find($id);
-        $post->delete();
+     public function destroy($id)
+     {
+         $post = \App\Post::find($id);
+         if ($post->user_id = \Auth::user()->id) {
+             $post->delete();
 
-        return $post;
-    }
+         } else {
+             return response ("Unauthorized", 403);
+         }
+         return $post;
+     }
 }
