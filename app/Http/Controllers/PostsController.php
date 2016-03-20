@@ -31,7 +31,7 @@ class PostsController extends Controller
         $post = new \App\Post;
         $post->user_id = Auth::user()->id;
         $post->title = $request->title;
-        $post->description = $request->description;
+        $post->post_description = $request->post_description;
         $post->save();
 
         return $post;
