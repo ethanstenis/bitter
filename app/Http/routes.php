@@ -11,6 +11,10 @@
 |
 */
 
+if(env('APP_DEBUG')) {
+    // Route to view logs. Only for use in development
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -24,14 +28,25 @@
 */
 
 Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
     Route::get('/', function () {
     	return view('welcome');
 	});
 
-    Route::auth();
+    // This is where our app lives.
+  Route::get('/home', 'HomeController@index');
 
-    Route::get('/home', 'HomeController@index');
-    
-    Route::resource('posts', 'PostsController');
-	Route::resource('users', 'UsersController');
+  Route::group(['prefix' => 'api'], function() {
+
+      Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
+      Route::resource('users', 'UsersController', ['except' => ['create', 'edit']]);
+
+      Route::group(['middleware' => 'auth'], function() {
+
+          Route::resource('posts', 'PostsController', [
+             'only' => ['store', 'update', 'destroy']
+          ]);
+      });
+  });
 });
