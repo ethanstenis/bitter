@@ -10,8 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', function () {
+    return view('welcome');
+});
 
-if(env('APP_DEBUG')) {
+if (env('APP_DEBUG')) {
     // Route to view logs. Only for use in development
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 }
@@ -29,10 +32,6 @@ if(env('APP_DEBUG')) {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
-    Route::get('/', function () {
-    	return view('welcome');
-	});
 
     // This is where our app lives.
   Route::get('/home', 'HomeController@index');
