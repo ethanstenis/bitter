@@ -1,5 +1,9 @@
 'use strict';
 
+// Also can write: $(document).on('ready', function) {
+
+// $(document).ready(function) {
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -36,6 +40,38 @@ var UsersCollection = Backbone.Collection.extend({
 
 // VIEWS
 
+
+var HomeView = Backbone.View.extend({
+  el: '\
+    <div class="container">\
+      <div class="row">\
+        <div class="three columns"></div>\
+        <div class ="six columns"></div>\
+          <div class="row">\
+            <div class="twelve columns"></div>\
+          <div>\
+          <div class="row">\
+            <div clss="twelve columns"></div>\
+            </div>\
+            <div class="twelve columns" id="all-posts"></div>\
+            </div>\
+            </div>\
+            ',
+
+  render: function(){
+    var that = this;
+    var posts = new PostsCollection();
+    posts.fetch();
+    var postsListView = new PostsListView({
+        collection: posts
+    });
+    this.$el.find('#all-posts').html(postsListView.render().el);
+    return this;
+  }
+});
+
+
+
 // This creates the Frontend Post Item View
 var PostItemView = Backbone.View.extend({
 	el: '<li class="hello"></li>',
@@ -44,7 +80,9 @@ var PostItemView = Backbone.View.extend({
 
   events: {
     'click h2': function(e) {
-        this.model.destroy();
+        this.model.destroy({
+          wait: true
+        });
     }
   },
 
@@ -63,7 +101,11 @@ var PostItemView = Backbone.View.extend({
 var PostsListView = Backbone.View.extend({
 	el: '<ul></ul>',
 
-	template: 'undefined',
+	template: _.template('\
+    <% posts.each(function(post)) { %>\
+      <li><a href="#"><% post.get("title") %></a></li>\
+      <% }) %>\
+  '),
 
   initialize: function() {
     this.listenTo(this.collection, 'all', function() {
@@ -83,6 +125,9 @@ var PostsListView = Backbone.View.extend({
     return this;
 	}
 });
+
+var homeView = new HomeView();
+$#('#content').html(homeView.render().el);
 
 // New iteration of a Posts Collection
 var posts = new PostsCollection();
