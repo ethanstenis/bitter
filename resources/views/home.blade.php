@@ -13,6 +13,22 @@
     <!-- Styles -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 
+<style>
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  #posts {
+    height: 300px;
+    overflow: scroll;
+  }
+
+</style>
+
 </head>
 <body>
     <div id="content"></div>
