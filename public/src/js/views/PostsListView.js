@@ -1,3 +1,6 @@
+var Backbone = require('backbone');
+var _= require('underscore');
+
 var PostsListView = Backbone.View.extend({
   el: '<ul></ul>',
 
@@ -18,6 +21,7 @@ var PostsListView = Backbone.View.extend({
     var that = this;
     this.$el.html('');
     this.collection.each(function(postModel) {
+      var PostItemView = require('./views/PostItemView.js');
       var postItemView = new PostItemView({
         model: postModel
       });

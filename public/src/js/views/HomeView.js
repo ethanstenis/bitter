@@ -1,3 +1,6 @@
+var Backbone = require('backbone');
+var _= require('underscore');
+
 var HomeView = Backbone.View.extend({
   el: '\
     <div class="container">\
@@ -17,8 +20,10 @@ var HomeView = Backbone.View.extend({
             ',
 
   insertPosts: function() {
+    var PostCollection = require('../collections/PostCollection.js');
     var posts = new PostCollection();
     posts.fetch();
+    var PostsListView = require('./views/PostsListView.js');
     var postsListView = new PostsListView({
       collection: posts
     });

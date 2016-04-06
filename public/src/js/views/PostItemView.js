@@ -1,3 +1,6 @@
+var Backbone = require('backbone');
+var _= require('underscore');
+
 var PostItemView = Backbone.View.extend({
   el: '<li class="hello"></li>',
 
